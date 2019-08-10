@@ -4,7 +4,7 @@ import fr.louarn.dto.OperationDto;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class MesComptesApp {
+class MesComptesApp {
 
     public static void main(String[] args) {
         log.info(OperationDto.builder()
