@@ -14,10 +14,10 @@ public class OperationDto {
 
     private String date;
 
+    private String libelle;
+
     private BigDecimal montantEur;
 
     private BigDecimal montantFranc;
-
-    private String libelle;
 
 }

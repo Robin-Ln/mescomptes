@@ -1,8 +1,10 @@
 package fr.louarn.modele;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum Devise {
 
     EUR("euro"),
@@ -10,7 +12,4 @@ public enum Devise {
 
     private String name;
 
-    Devise(String name) {
-        this.name = name;
-    }
 }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class CsvMapperTest {
 
-    private static ICsvMapper CsvMapper = new CsvMapperImpl();
+    private static ICsvMapper CsvMapper = new ICsvMapperImpl();
 
     @Test
     public void modeleToDto() {

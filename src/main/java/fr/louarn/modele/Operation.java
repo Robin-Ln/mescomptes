@@ -15,6 +15,8 @@ public class Operation {
 
     private String libelle;
 
-    Montant montantEur;
+    private Montant montantEur;
+
+    private Montant montantFranc;
 
 }
