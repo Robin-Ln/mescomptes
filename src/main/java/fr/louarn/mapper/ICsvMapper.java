@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface ICsvMapper {
 
-    @Mapping(target = "date", ignore = true)
+    @Mapping(source = "date", target = "date", dateFormat = "dd/MM/yyyy")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(target = "montantEur", ignore = true)
     @Mapping(target = "montantFranc", ignore = true)

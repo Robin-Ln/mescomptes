@@ -1,18 +1,30 @@
 package fr.louarn.mapper;
 
+import fr.louarn.constant.Constant;
 import fr.louarn.dto.OperationDto;
 import fr.louarn.modele.Operation;
-import org.junit.Assert;
+import lombok.extern.log4j.Log4j;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
+import static org.junit.Assert.assertEquals;
+
+@Log4j
 public class CsvMapperTest {
 
     private static ICsvMapper csvMapper = new ICsvMapperImpl();
 
+    /**
+     * Test de la converstion d'un objet OperationDto en Operation
+     * @throws ParseException exption propager lorsque l'on parse la date
+     */
     @Test
-    public void dtoToModele() {
+    public void dtoToModele() throws ParseException {
         OperationDto operationDto = OperationDto.builder()
                 .date("14/03/1996")
                 .libelle("Macdo")
@@ -21,6 +33,16 @@ public class CsvMapperTest {
 
         Operation operation = csvMapper.dtoToModele(operationDto);
 
-        Assert.assertEquals(operation.getLibelle(), operationDto.getLibelle());
+        // Test du libellé
+        assertEquals(operation.getLibelle(), operationDto.getLibelle());
+
+        // Test de la date
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constant.DATE_FORMAT.getValue(), Locale.FRANCE);
+        calendar.setTime(simpleDateFormat.parse(operationDto.getDate()));
+
+        assertEquals(operation.getDate(), calendar);
+
+        // Test du montant
     }
 }
