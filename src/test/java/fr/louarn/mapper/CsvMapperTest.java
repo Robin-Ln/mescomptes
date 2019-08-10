@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 @Log4j
 public class CsvMapperTest {
 
-    private static ICsvMapper csvMapper = new ICsvMapperImpl();
+    private static final ICsvMapper csvMapper = new ICsvMapperImpl();
 
     /**
      * Test de la converstion d'un objet OperationDto en Operation

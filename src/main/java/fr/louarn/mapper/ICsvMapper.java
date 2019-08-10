@@ -47,9 +47,4 @@ public interface ICsvMapper {
                 .build();
     }
 
-    @Named("createMontant")
-    default String createMontant(Montant montant) {
-        return montant.getDevise().toString() + " " + montant.getDevise().getName();
-    }
-
 }
