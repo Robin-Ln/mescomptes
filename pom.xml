@@ -14,6 +14,7 @@
         <lombok.version>1.18.8</lombok.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
         <junit.version>4.4</junit.version>
+        <opencsv.version>4.0</opencsv.version>
 
 
         <!-- Version et configuration de la parties build -->
@@ -63,6 +64,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
+        </dependency>
 
 
     </dependencies>
