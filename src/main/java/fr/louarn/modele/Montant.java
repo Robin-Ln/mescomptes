@@ -14,6 +14,6 @@ public class Montant {
 
     private Devise devise;
 
-    private BigDecimal valeur;
+    private BigDecimal value;
 
 }

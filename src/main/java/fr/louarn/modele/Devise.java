@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Devise {
 
-    EUR("euro"),
+    EURO("euro"),
     FRANC("franc");
 
     private String name;

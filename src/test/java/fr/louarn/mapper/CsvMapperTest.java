@@ -2,6 +2,7 @@ package fr.louarn.mapper;
 
 import fr.louarn.constant.Constant;
 import fr.louarn.dto.OperationDto;
+import fr.louarn.modele.Devise;
 import fr.louarn.modele.Operation;
 import lombok.extern.log4j.Log4j;
 import org.junit.Test;
@@ -29,9 +30,10 @@ public class CsvMapperTest {
                 .date("14/03/1996")
                 .libelle("Macdo")
                 .montantEur(BigDecimal.valueOf(12.4))
+                .montantFranc(BigDecimal.valueOf(163.3))
                 .build();
 
-        Operation operation = csvMapper.dtoToModele(operationDto);
+        Operation operation = csvMapper.operationDtoToOperation(operationDto);
 
         // Test du libellé
         assertEquals(operation.getLibelle(), operationDto.getLibelle());
@@ -43,6 +45,12 @@ public class CsvMapperTest {
 
         assertEquals(operation.getDate(), calendar);
 
-        // Test du montant
+        // Test du montant en euro
+        assertEquals(operation.getMontantEur().getValue(), operationDto.getMontantEur());
+        assertEquals(Devise.EURO, operation.getMontantEur().getDevise());
+
+        // Test du montant en franc
+        assertEquals(operation.getMontantFranc().getValue(), operationDto.getMontantFranc());
+        assertEquals(Devise.FRANC, operation.getMontantFranc().getDevise());
     }
 }
