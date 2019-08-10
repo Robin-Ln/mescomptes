@@ -2,17 +2,14 @@ package fr.louarn.mapper;
 
 import fr.louarn.dto.OperationDto;
 import fr.louarn.modele.Operation;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
 public class CsvMapperTest {
 
-    private static ICsvMapper CsvMapper = new ICsvMapperImpl();
-
-    @Test
-    public void modeleToDto() {
-    }
+    private static ICsvMapper csvMapper = new ICsvMapperImpl();
 
     @Test
     public void dtoToModele() {
@@ -22,6 +19,8 @@ public class CsvMapperTest {
                 .montantEur(BigDecimal.valueOf(12.4))
                 .build();
 
-        Operation operation = CsvMapper.dtoToModele(operationDto);
+        Operation operation = csvMapper.dtoToModele(operationDto);
+
+        Assert.assertEquals(operation.getLibelle(), operationDto.getLibelle());
     }
 }
