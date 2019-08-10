@@ -1,5 +1,6 @@
 package fr.louarn.mapper;
 
+import fr.louarn.constant.Constant;
 import fr.louarn.dto.OperationDto;
 import fr.louarn.modele.Devise;
 import fr.louarn.modele.Montant;
@@ -13,11 +14,17 @@ import java.math.BigDecimal;
 @Mapper
 public interface ICsvMapper {
 
-    @Mapping(source = "date", target = "date", dateFormat = "dd/MM/yyyy")
+    @Mapping(source = "date", target = "date", dateFormat = Constant.DATE_FORMAT)
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur", qualifiedByName = "createEurMontant", target = "montantEur")
     @Mapping(source = "montantFranc", qualifiedByName = "createFrancMontant", target = "montantFranc")
     Operation operationDtoToOperation(OperationDto operationDto);
+
+    @Mapping(source = "date", target = "date", dateFormat = Constant.DATE_FORMAT)
+    @Mapping(source = "libelle", target = "libelle")
+    @Mapping(source = "montantEur.value", target = "montantEur", numberFormat = Constant.BIG_DECIMAL_FORMAT)
+    @Mapping(source = "montantFranc.value", target = "montantFranc", numberFormat = Constant.BIG_DECIMAL_FORMAT)
+    OperationDto operationToOperationDto(Operation operation);
 
 
     @Named("createEurMontant")
@@ -31,13 +38,18 @@ public interface ICsvMapper {
     }
 
     @Named("createFrancMontant")
-    default Montant createFrancDevise(String value) {
+    default Montant createFrancMontant(String value) {
         BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(value));
         return Montant
                 .builder()
                 .value(bigDecimal)
                 .devise(Devise.FRANC)
                 .build();
+    }
+
+    @Named("createMontant")
+    default String createMontant(Montant montant) {
+        return montant.getDevise().toString() + " " + montant.getDevise().getName();
     }
 
 }

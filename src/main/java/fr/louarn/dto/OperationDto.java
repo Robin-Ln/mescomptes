@@ -2,8 +2,6 @@ package fr.louarn.dto;
 
 import lombok.*;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @Builder
@@ -17,8 +15,8 @@ public class OperationDto {
 
     private String libelle;
 
-    private BigDecimal montantEur;
+    private String montantEur;
 
-    private BigDecimal montantFranc;
+    private String montantFranc;
 
 }

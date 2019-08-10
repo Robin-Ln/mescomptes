@@ -1,15 +1,11 @@
 package fr.louarn.constant;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+public class Constant {
 
-@Getter
-@AllArgsConstructor
-public enum  Constant {
+    private Constant(){}
 
-    DATE_FORMAT("dd/MM/yyyy");
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
 
-    private String value;
-
+    public static final String BIG_DECIMAL_FORMAT = "#.###";
 }

@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
