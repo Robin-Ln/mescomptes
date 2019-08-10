@@ -8,19 +8,21 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 public class OperationDao {
-    private static final String SAMPLE_CSV_FILE_PATH = "/1027012P0341565451753399.csv";
+    private static final String SAMPLE_CSV_FILE_PATH = "1027012P0341565464952412.csv";
 
     List<OperationDto> getOperations() throws IOException, URISyntaxException {
-
-        Reader reader = Files.newBufferedReader(Paths.get(getClass().getResource(SAMPLE_CSV_FILE_PATH).toURI()));
+        Path path = Paths.get(ClassLoader.getSystemResource(SAMPLE_CSV_FILE_PATH).toURI());
+        Reader reader = Files.newBufferedReader(path);
 
         CsvToBean<OperationDto> csvToBean = new CsvToBeanBuilder<OperationDto>(reader)
                 .withType(OperationDto.class)
                 .withIgnoreLeadingWhiteSpace(true)
+                .withSeparator(';')
                 .build();
 
         return csvToBean.parse();

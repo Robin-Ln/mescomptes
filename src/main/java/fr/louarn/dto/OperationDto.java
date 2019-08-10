@@ -1,6 +1,6 @@
 package fr.louarn.dto;
 
-import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 import lombok.*;
 
 @Getter
@@ -12,16 +12,16 @@ import lombok.*;
 @EqualsAndHashCode
 public class OperationDto {
 
-    @CsvBindByName(column = "Date", required = true)
+    @CsvBindByPosition(position = 0)
     private String date;
 
-    @CsvBindByName(column = "Libelle", required = true)
+    @CsvBindByPosition(position = 1)
     private String libelle;
 
-    @CsvBindByName(column = "MontantEUROS", required = true)
+    @CsvBindByPosition(position = 2)
     private String montantEur;
 
-    @CsvBindByName(column = "MontantFRANCS", required = true)
+    @CsvBindByPosition(position = 3)
     private String montantFranc;
 
 }

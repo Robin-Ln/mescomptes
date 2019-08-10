@@ -22,11 +22,6 @@ public class CsvMapperTest {
 
     private static final ICsvMapper csvMapper = new ICsvMapperImpl();
 
-    /**
-     * Test de la converstion d'un objet OperationDto en Operation
-     *
-     * @throws ParseException exption propager lorsque l'on parse la date
-     */
     @Test
     public void testMapperOperationDtoToOperation() throws ParseException {
         OperationDto operationDto = OperationDto.builder()
