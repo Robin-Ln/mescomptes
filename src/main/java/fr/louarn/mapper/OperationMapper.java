@@ -11,8 +11,8 @@ import org.mapstruct.Named;
 
 import java.math.BigDecimal;
 
-@Mapper
-public interface ICsvMapper {
+@Mapper(componentModel = "spring")
+public interface OperationMapper {
 
     @Mapping(source = "date", target = "date", dateFormat = Constant.DATE_FORMAT)
     @Mapping(source = "libelle", target = "libelle")

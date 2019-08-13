@@ -5,8 +5,11 @@ import fr.louarn.dto.OperationDto;
 import fr.louarn.modele.Devise;
 import fr.louarn.modele.Montant;
 import fr.louarn.modele.Operation;
-import lombok.extern.log4j.Log4j;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -17,10 +20,12 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 
-@Log4j
-public class CsvMapperTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class OperationMapperTest {
 
-    private static final ICsvMapper csvMapper = new ICsvMapperImpl();
+    @Autowired
+    private OperationMapper csvMapper;
 
     @Test
     public void testMapperOperationDtoToOperation() throws ParseException {

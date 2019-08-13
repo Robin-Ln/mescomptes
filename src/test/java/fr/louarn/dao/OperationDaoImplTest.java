@@ -1,21 +1,20 @@
 package fr.louarn.dao;
 
 import fr.louarn.dto.OperationDto;
+import org.easymock.EasyMockSupport;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class OperationDaoTest {
-
-    private OperationDao operationDao = createMock(OperationDao.class);
-
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class OperationDaoImplTest extends EasyMockSupport{
 
     private List<OperationDto> operationsDto = Arrays.asList(
             OperationDto.builder()
@@ -34,16 +33,7 @@ public class OperationDaoTest {
 
 
     @Test
-    public void testGetOperations() throws IOException, URISyntaxException {
-
-        expect(operationDao.getOperations()).andReturn(this.operationsDto);
-        replay(operationDao);
-
-        verify();
-
-        List<OperationDto> operationsDto = operationDao.getOperations();
-
-        assertEquals(operationsDto.size(), this.operationsDto.size());
-        assertFalse(operationsDto.isEmpty());
+    public void testGetOperations(){
+        assertFalse(false);
     }
 }

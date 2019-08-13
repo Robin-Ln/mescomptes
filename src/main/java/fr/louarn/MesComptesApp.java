@@ -1,18 +1,16 @@
 package fr.louarn;
 
-import fr.louarn.dto.OperationDto;
-import lombok.extern.log4j.Log4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Log4j
+
+@SpringBootApplication
+@EnableSwagger2
 class MesComptesApp {
 
     public static void main(String[] args) {
-        log.info(OperationDto.builder()
-                .date("14/03/1996")
-                .libelle("Macdo")
-                .montantEur("12.4")
-                .build());
-
+        SpringApplication.run(MesComptesApp.class, args);
     }
 
 }
