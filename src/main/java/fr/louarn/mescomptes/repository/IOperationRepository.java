@@ -9,6 +9,8 @@ public interface IOperationRepository extends JpaRepository<Operation, Integer> 
 
     Optional<Operation> findById(Integer id);
 
-    Optional<Operation> deleteById(Integer id);
+    void deleteById(Integer id);
+
+    boolean existsById(Integer id);
 
 }

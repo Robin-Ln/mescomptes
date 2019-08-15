@@ -13,5 +13,5 @@ public interface IOperationService {
 
     OperationDto getOperation(Integer id) throws DaoExeption;
 
-    void deleteOperation(Integer id);
+    void deleteOperation(Integer id) throws DaoExeption;
 }

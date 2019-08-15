@@ -7,6 +7,7 @@ import fr.louarn.mescomptes.exeption.DaoExeption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,13 +17,14 @@ public class OperationControllerImpl implements IOperationController {
 
     private IOperationService operationService;
 
+
     @Autowired
     public OperationControllerImpl(IOperationService operationService) {
         this.operationService = operationService;
     }
 
     @Override
-    public ResponseEntity<Void> createOperation(OperationDto operationDto) {
+    public ResponseEntity<Void> createOperation(@RequestBody OperationDto operationDto) {
         operationService.createOperation(operationDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -35,13 +37,12 @@ public class OperationControllerImpl implements IOperationController {
 
     @Override
     public ResponseEntity<OperationDto> getOperation(Integer id) {
-        OperationDto operationDto = null;
         try {
-            operationDto = operationService.getOperation(id);
+            OperationDto operationDto = operationService.getOperation(id);
+            return new ResponseEntity<>(operationDto, HttpStatus.OK);
         } catch (DaoExeption daoExeption) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(operationDto, HttpStatus.OK);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class OperationControllerImpl implements IOperationController {
         try {
             operationService.deleteOperation(id);
         } catch (DaoExeption daoExeption) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
