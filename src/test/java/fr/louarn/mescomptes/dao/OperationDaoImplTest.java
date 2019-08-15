@@ -1,6 +1,6 @@
-package fr.louarn.dao;
+package fr.louarn.mescomptes.dao;
 
-import fr.louarn.dto.OperationDto;
+import fr.louarn.mescomptes.dto.OperationDto;
 import org.easymock.EasyMockSupport;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,10 +1,11 @@
-package fr.louarn.mapper;
+package fr.louarn.mescomptes.mapper;
 
-import fr.louarn.constant.Constant;
-import fr.louarn.dto.OperationDto;
-import fr.louarn.modele.Devise;
-import fr.louarn.modele.Montant;
-import fr.louarn.modele.Operation;
+
+import fr.louarn.mescomptes.constant.Constant;
+import fr.louarn.mescomptes.dto.OperationDto;
+import fr.louarn.mescomptes.modele.Devise;
+import fr.louarn.mescomptes.modele.Montant;
+import fr.louarn.mescomptes.modele.Operation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 public class OperationMapperTest {
 
     @Autowired
-    private OperationMapper csvMapper;
+    private OperationMapper operationMapper;
 
     @Test
     public void testMapperOperationDtoToOperation() throws ParseException {
@@ -36,7 +37,7 @@ public class OperationMapperTest {
                 .montantFranc("163.3")
                 .build();
 
-        Operation operation = csvMapper.operationDtoToOperation(operationDto);
+        Operation operation = operationMapper.operationDtoToOperation(operationDto);
 
         // Test du libellé
         assertEquals(operation.getLibelle(), operationDto.getLibelle());
@@ -50,11 +51,11 @@ public class OperationMapperTest {
 
         // Test du montant en euro
         assertEquals(operation.getMontantEur().getValue().toString(), operationDto.getMontantEur());
-        assertEquals(Devise.EURO, operation.getMontantEur().getDevise());
+        assertEquals(Devise.builder().code("EURO").libelle("euro").build(), operation.getMontantEur().getDevise());
 
         // Test du montant en franc
         assertEquals(operation.getMontantFranc().getValue().toString(), operationDto.getMontantFranc());
-        assertEquals(Devise.FRANC, operation.getMontantFranc().getDevise());
+        assertEquals(Devise.builder().code("FRANC").libelle("franc").build(), operation.getMontantFranc().getDevise());
     }
 
     @Test
@@ -69,17 +70,25 @@ public class OperationMapperTest {
                 .libelle("Macdo")
                 .montantEur(Montant
                         .builder()
-                        .devise(Devise.EURO)
+                        .devise(Devise
+                                .builder()
+                                .code("EURO")
+                                .libelle("euro")
+                                .build())
                         .value(BigDecimal.valueOf(12.4))
                         .build())
                 .montantFranc(Montant
                         .builder()
-                        .devise(Devise.FRANC)
+                        .devise(Devise
+                                .builder()
+                                .code("FRANC")
+                                .libelle("franc")
+                                .build())
                         .value(BigDecimal.valueOf(163.3))
                         .build())
                 .build();
 
-        OperationDto operationDto = csvMapper.operationToOperationDto(operation);
+        OperationDto operationDto = operationMapper.operationToOperationDto(operation);
 
         // Test du libellé
         assertEquals(operation.getLibelle(), operationDto.getLibelle());

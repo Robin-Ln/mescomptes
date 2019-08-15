@@ -1,9 +1,12 @@
-package fr.louarn.constant;
+package fr.louarn.mescomptes.constant;
 
 
 public class Constant {
 
     private Constant(){}
+
+
+    public static final String SPRING_MAPPER = "spring";
 
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 

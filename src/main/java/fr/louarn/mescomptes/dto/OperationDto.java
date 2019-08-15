@@ -1,4 +1,4 @@
-package fr.louarn.dto;
+package fr.louarn.mescomptes.dto;
 
 import lombok.*;
 
