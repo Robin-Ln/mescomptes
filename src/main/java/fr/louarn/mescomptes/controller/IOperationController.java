@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "Action de base sur une opérations")
+@Api(value = "/operation", tags = "Operation")
 @RequestMapping(path = "/operation")
 public interface IOperationController {
 
