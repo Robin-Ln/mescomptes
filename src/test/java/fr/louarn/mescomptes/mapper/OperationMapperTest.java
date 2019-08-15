@@ -29,12 +29,13 @@ public class OperationMapperTest {
     private OperationMapper operationMapper;
 
     @Test
-    public void testMapperOperationDtoToOperation() throws ParseException {
-        OperationDto operationDto = OperationDto.builder()
-                .date("14/03/1996")
+    public void testMapperOperationDtoToOperation() {
+        OperationDto operationDto = OperationDto
+                .builder()
+                .date(Calendar.getInstance())
                 .libelle("Macdo")
-                .montantEur("12.4")
-                .montantFranc("163.3")
+                .montantEur(BigDecimal.valueOf(12.4))
+                .montantFranc(BigDecimal.valueOf(163.3))
                 .build();
 
         Operation operation = operationMapper.operationDtoToOperation(operationDto);
@@ -43,18 +44,14 @@ public class OperationMapperTest {
         assertEquals(operation.getLibelle(), operationDto.getLibelle());
 
         // Test de la date
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constant.DATE_FORMAT, Locale.FRANCE);
-        calendar.setTime(simpleDateFormat.parse(operationDto.getDate()));
-
-        assertEquals(operation.getDate(), calendar);
+        assertEquals(operation.getDate(), operationDto.getDate());
 
         // Test du montant en euro
-        assertEquals(operation.getMontantEur().getValue().toString(), operationDto.getMontantEur());
+        assertEquals(operation.getMontantEur().getValue(), operationDto.getMontantEur());
         assertEquals(Devise.builder().code("EURO").libelle("euro").build(), operation.getMontantEur().getDevise());
 
         // Test du montant en franc
-        assertEquals(operation.getMontantFranc().getValue().toString(), operationDto.getMontantFranc());
+        assertEquals(operation.getMontantFranc().getValue(), operationDto.getMontantFranc());
         assertEquals(Devise.builder().code("FRANC").libelle("franc").build(), operation.getMontantFranc().getDevise());
     }
 
@@ -94,17 +91,12 @@ public class OperationMapperTest {
         assertEquals(operation.getLibelle(), operationDto.getLibelle());
 
         // Test de la date
-        String formatedDate = new SimpleDateFormat(Constant.DATE_FORMAT).format(calendar.getTime());
-        assertEquals(operationDto.getDate(), formatedDate);
+        assertEquals(operationDto.getDate(), operation.getDate());
 
         // Test du montant en euro
-        String eurMontant = new DecimalFormat(Constant.BIG_DECIMAL_FORMAT)
-                .format(operation.getMontantEur().getValue());
-        assertEquals(operationDto.getMontantEur(), eurMontant);
+        assertEquals(operationDto.getMontantEur(), operation.getMontantEur().getValue());
 
         // Test du montant en franc
-        String francMontant = new DecimalFormat(Constant.BIG_DECIMAL_FORMAT)
-                .format(operation.getMontantFranc().getValue());
-        assertEquals(operationDto.getMontantFranc(), francMontant);
+        assertEquals(operationDto.getMontantFranc(), operation.getMontantFranc().getValue());
     }
 }

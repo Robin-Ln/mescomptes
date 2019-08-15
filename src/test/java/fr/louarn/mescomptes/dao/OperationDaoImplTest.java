@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
@@ -18,16 +20,16 @@ public class OperationDaoImplTest extends EasyMockSupport{
 
     private List<OperationDto> operationsDto = Arrays.asList(
             OperationDto.builder()
-                    .date("14/03/1996")
+                    .date(Calendar.getInstance())
                     .libelle("Macdo")
-                    .montantEur("12.4")
-                    .montantFranc("163.3")
+                    .montantEur(BigDecimal.valueOf(12.4))
+                    .montantFranc(BigDecimal.valueOf(163.3))
                     .build(),
             OperationDto.builder()
-                    .date("14/03/1996")
+                    .date(Calendar.getInstance())
                     .libelle("Kfc")
-                    .montantEur("18.4")
-                    .montantFranc("203.3")
+                    .montantEur(BigDecimal.valueOf(12.4))
+                    .montantFranc(BigDecimal.valueOf(163.3))
                     .build()
     );
 

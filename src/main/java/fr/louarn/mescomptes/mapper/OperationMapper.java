@@ -16,14 +16,14 @@ import java.math.BigDecimal;
 public interface OperationMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "date", target = "date", dateFormat = Constant.DATE_FORMAT)
+    @Mapping(source = "date", target = "date")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur", qualifiedByName = "createEurMontant", target = "montantEur")
     @Mapping(source = "montantFranc", qualifiedByName = "createFrancMontant", target = "montantFranc")
     Operation operationDtoToOperation(OperationDto operationDto);
 
 
-    @Mapping(source = "date", target = "date", dateFormat = Constant.DATE_FORMAT)
+    @Mapping(source = "date", target = "date")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur.value", target = "montantEur", numberFormat = Constant.BIG_DECIMAL_FORMAT)
     @Mapping(source = "montantFranc.value", target = "montantFranc", numberFormat = Constant.BIG_DECIMAL_FORMAT)

@@ -2,6 +2,9 @@ package fr.louarn.mescomptes.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
+
 @Getter
 @Setter
 @Builder
@@ -11,12 +14,12 @@ import lombok.*;
 @EqualsAndHashCode
 public class OperationDto {
 
-    private String date;
+    private Calendar date;
 
     private String libelle;
 
-    private String montantEur;
+    private BigDecimal montantEur;
 
-    private String montantFranc;
+    private BigDecimal montantFranc;
 
 }
