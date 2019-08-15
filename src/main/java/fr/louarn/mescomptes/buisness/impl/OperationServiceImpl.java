@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OperationServiceImpl implements IOperationService {
@@ -33,7 +32,7 @@ public class OperationServiceImpl implements IOperationService {
 
     @Override
     public void createOperation(OperationDto operationDto) {
-        Operation operation = operationMapper.operationDtoToOperation(operationDto);
+        Operation operation = operationMapper.dtoToEntity(operationDto);
         montantRepository.save(operation.getMontantEur());
         montantRepository.save(operation.getMontantFranc());
         operationRepository.save(operation);
@@ -41,11 +40,8 @@ public class OperationServiceImpl implements IOperationService {
 
     @Override
     public List<OperationDto> getOperations() {
-        return operationRepository
-                .findAll()
-                .stream()
-                .map(operation -> operationMapper.operationToOperationDto(operation))
-                .collect(Collectors.toList());
+        List<Operation> operations = operationRepository.findAll();
+        return operationMapper.entityToDto(operations);
     }
 
     @Override
@@ -53,12 +49,11 @@ public class OperationServiceImpl implements IOperationService {
         Operation operation = operationRepository
                 .findById(id)
                 .orElseThrow(DaoExeption::new);
-        return operationMapper.operationToOperationDto(operation);
+        return operationMapper.entityToDto(operation);
     }
 
     @Override
     public void deleteOperation(Integer id) throws DaoExeption {
-
         if (operationRepository.existsById(id)) {
             operationRepository.deleteById(id);
         } else {

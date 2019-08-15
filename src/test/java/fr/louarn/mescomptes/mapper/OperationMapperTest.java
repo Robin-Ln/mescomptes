@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,7 +37,7 @@ public class OperationMapperTest {
                 .montantFranc(BigDecimal.valueOf(163.3))
                 .build();
 
-        Operation operation = operationMapper.operationDtoToOperation(operationDto);
+        Operation operation = operationMapper.dtoToEntity(operationDto);
 
         // Test du libellé
         assertEquals(operation.getLibelle(), operationDto.getLibelle());
@@ -85,7 +84,7 @@ public class OperationMapperTest {
                         .build())
                 .build();
 
-        OperationDto operationDto = operationMapper.operationToOperationDto(operation);
+        OperationDto operationDto = operationMapper.entityToDto(operation);
 
         // Test du libellé
         assertEquals(operation.getLibelle(), operationDto.getLibelle());

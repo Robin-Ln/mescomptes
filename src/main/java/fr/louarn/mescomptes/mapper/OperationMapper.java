@@ -13,25 +13,28 @@ import org.mapstruct.Named;
 import java.math.BigDecimal;
 
 @Mapper(componentModel = "spring")
-public interface OperationMapper {
+public abstract class OperationMapper implements IMapper<Operation, OperationDto> {
 
+
+    @Override
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "date", target = "date")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur", qualifiedByName = "createEurMontant", target = "montantEur")
     @Mapping(source = "montantFranc", qualifiedByName = "createFrancMontant", target = "montantFranc")
-    Operation operationDtoToOperation(OperationDto operationDto);
+    public abstract Operation dtoToEntity(OperationDto operationDto);
 
 
+    @Override
     @Mapping(source = "date", target = "date")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur.value", target = "montantEur", numberFormat = Constant.BIG_DECIMAL_FORMAT)
     @Mapping(source = "montantFranc.value", target = "montantFranc", numberFormat = Constant.BIG_DECIMAL_FORMAT)
-    OperationDto operationToOperationDto(Operation operation);
+    public abstract OperationDto entityToDto(Operation operation);
 
 
     @Named("createEurMontant")
-    default Montant createEurMontant(String value) {
+    Montant createEurMontant(String value) {
         BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(value));
         return Montant
                 .builder()
@@ -45,7 +48,7 @@ public interface OperationMapper {
     }
 
     @Named("createFrancMontant")
-    default Montant createFrancMontant(String value) {
+    Montant createFrancMontant(String value) {
         BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(value));
         return Montant
                 .builder()
