@@ -55,13 +55,14 @@ public class OperationMapperTest {
     }
 
     @Test
-    public void testMapperOperationToOperationFto() throws ParseException {
+    public void testMapperOperationToOperationDto() throws ParseException {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constant.DATE_FORMAT, Locale.FRANCE);
         calendar.setTime(simpleDateFormat.parse("14/03/1996"));
 
         Operation operation = Operation
                 .builder()
+                .id(1)
                 .date(calendar)
                 .libelle("Macdo")
                 .montantEur(Montant
@@ -85,6 +86,9 @@ public class OperationMapperTest {
                 .build();
 
         OperationDto operationDto = operationMapper.entityToDto(operation);
+
+        // Test de l'id
+        assertEquals(operation.getId(), operationDto.getId());
 
         // Test du libellé
         assertEquals(operation.getLibelle(), operationDto.getLibelle());

@@ -8,7 +8,7 @@ import java.util.List;
 public interface IOperationService {
 
     /**
-     *
+     * Création d'une opération
      * @param operationDto
      */
     void createOperation(OperationDto operationDto);

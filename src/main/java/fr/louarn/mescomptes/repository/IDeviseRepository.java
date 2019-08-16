@@ -6,26 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-@Transactional
 public interface IDeviseRepository extends JpaRepository<Devise, String> {
 
-    /**
-     *
-     * @param code
-     * @return
-     */
     Optional<Devise> findByCode(String code);
 
-    /**
-     *
-     * @param code
-     */
+    @Transactional()
     void deleteByCode(String code);
 
-    /**
-     *
-     * @param code
-     * @return
-     */
     boolean existsByCode(String code);
 }

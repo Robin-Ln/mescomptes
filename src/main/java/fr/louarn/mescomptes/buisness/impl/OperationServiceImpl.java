@@ -54,10 +54,11 @@ public class OperationServiceImpl implements IOperationService {
 
     @Override
     public void deleteOperation(Integer id) throws DaoExeption {
-        if (operationRepository.existsById(id)) {
-            operationRepository.deleteById(id);
-        } else {
-            throw new DaoExeption();
-        }
+        Operation operation = operationRepository
+                .findById(id)
+                .orElseThrow(DaoExeption::new);
+        montantRepository.deleteById(operation.getMontantEur().getId());
+        montantRepository.deleteById(operation.getMontantFranc().getId());
+        operationRepository.deleteById(id);
     }
 }
