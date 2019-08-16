@@ -14,6 +14,8 @@ import java.util.Calendar;
 @EqualsAndHashCode
 public class OperationDto {
 
+    private Integer id;
+
     private Calendar date;
 
     private String libelle;

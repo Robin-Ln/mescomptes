@@ -17,7 +17,7 @@ public abstract class OperationMapper implements IMapper<Operation, OperationDto
 
 
     @Override
-    @Mapping(target = "id", ignore = true)
+    @Mapping(source="id", target = "id")
     @Mapping(source = "date", target = "date")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur", qualifiedByName = "createEurMontant", target = "montantEur")
@@ -26,6 +26,7 @@ public abstract class OperationMapper implements IMapper<Operation, OperationDto
 
 
     @Override
+    @Mapping(source="id", target = "id")
     @Mapping(source = "date", target = "date")
     @Mapping(source = "libelle", target = "libelle")
     @Mapping(source = "montantEur.value", target = "montantEur", numberFormat = Constant.BIG_DECIMAL_FORMAT)
